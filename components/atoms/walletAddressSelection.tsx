@@ -14,13 +14,13 @@ type Props = {
 
 export const WalletAddressSelection: FC<Props> = (props: Props) => {
   return (
-    <>
+    <div>
       <div>Wallet Address</div>
       <div className="text-ellipsis overflow-hidden w-44 items-center flex justify-center">
         <select
           onChange={(event) => {
             props.setActingAccount(
-              props.[Number.parseInt(event.target.value)],
+              props.idList[Number.parseInt(event.target.value)],
             );
             props.setIsCreatedFnRun(false);
           }}
@@ -37,6 +37,6 @@ export const WalletAddressSelection: FC<Props> = (props: Props) => {
           )}
         </select>
       </div>
-    </>
+    </div>
   );
 };
