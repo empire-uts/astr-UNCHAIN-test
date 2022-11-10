@@ -13,7 +13,7 @@ type Props = {
 
 const HeaderProfile: FC<Props> = (props) => {
   return (
-    <p className="flex-row flex items-center ml-[30px]">
+    <div className="flex-row flex items-center ml-[30px]">
       <Image
         className="w-[70px] h-[70px] rounded-full mr-3"
         src={props.imgUrl}
@@ -21,8 +21,8 @@ const HeaderProfile: FC<Props> = (props) => {
         width={30}
         height={30}
       />
-      <p className="mr-3">
-        <p>wallet address</p>
+      <div className="mr-3">
+        <div>wallet address</div>
         <select
           onChange={(event) => {
             props.setActingAccount(props.idList[Number(event.target.value)]);
@@ -39,8 +39,8 @@ const HeaderProfile: FC<Props> = (props) => {
             </option>
           )}
         </select>
-      </p>
-    </p>
+      </div>
+    </div>
   );
 };
 
