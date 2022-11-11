@@ -92,8 +92,8 @@ type PropsGFEL = {
 
 const contractAddress: string = process.env
   .NEXT_PUBLIC_CONTRACT_ADDRESS as string;
-const IMAGE_FOR_UNKNOWN_USER: string = process.env
-  .NEXT_PUBLIC_UNKNOWN_IMAGE_URL as string;
+const imageUrlForUnknown=process.env
+.NEXT_PUBLIC_UNKNOWN_IMAGE_URL as string;
 
 // check if already create profile in contract function
 export const checkCreatedInfo = async (props: PropsCCI) => {
@@ -121,9 +121,8 @@ export const createProfile = async (props: PropsCP) => {
   const create_profile = await contract.tx.createProfile(
     {
       value: 0,
-      gasLimit: 9375000000,
+      gasLimit: 20000000000,
     },
-    props.actingAccount.address,
   );
   if (injector !== undefined) {
     create_profile.signAndSend(
@@ -148,7 +147,7 @@ export const getProfileForHome = async (props: PropsGPFH) => {
   if (output !== undefined && output !== null) {
     props.setImgUrl(
       output.toHuman()?.imgUrl == null
-        ? IMAGE_FOR_UNKNOWN_USER
+        ? imageUrlForUnknown
         : output.toHuman()?.imgUrl.toString(),
     );
   }
@@ -168,7 +167,7 @@ export const getProfileForProfile = async (props: PropsGPFP) => {
   if (output !== undefined && output !== null) {
     props.setImgUrl(
       output.toHuman()?.imgUrl == null
-        ? IMAGE_FOR_UNKNOWN_USER
+        ? imageUrlForUnknown
         : output.toHuman()?.imgUrl.toString(),
     );
     props.setName(
@@ -193,12 +192,12 @@ export const getProfileForMessage = async (props: PropsGPFM) => {
   if (output !== undefined && output !== null) {
     props.setMyImgUrl(
       output.toHuman()?.imgUrl == null
-        ? IMAGE_FOR_UNKNOWN_USER
+        ? imageUrlForUnknown
         : output.toHuman()?.imgUrl.toString(),
     );
     props.setImgUrl(
       output.toHuman()?.imgUrl == null
-        ? IMAGE_FOR_UNKNOWN_USER
+        ? imageUrlForUnknown
         : output.toHuman()?.imgUrl.toString(),
     );
     props.setFriendList(
@@ -236,7 +235,6 @@ export const follow = async (props: PropsF) => {
       value: 0,
       gasLimit: 200000000000,
     },
-    props.actingAccount!.address,
     props.followedId,
   );
   if (injector !== undefined) {
@@ -258,7 +256,6 @@ export const setProfileInfo = async (props: PropSPI) => {
       value: 0,
       gasLimit: 187500000000,
     },
-    props.actingAccount?.address,
     props.name,
     props.imgUrl,
   );
